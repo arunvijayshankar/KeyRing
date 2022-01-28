@@ -1,10 +1,3 @@
-"""
-
-Some kind of keychain
-
-
-"""
-
 import utils
 
 
