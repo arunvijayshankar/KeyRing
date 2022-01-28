@@ -1,5 +1,5 @@
 import redisHandler
-import keyring
+import Taqqiq
 import utils
 
 
@@ -18,7 +18,7 @@ def new_service():
             edit_service()
         else:
             utils.kill_redis_conn(r)
-            keyring.entry()
+            Taqqiq.entry()
     else:
         serv_login['serv_name'] = serv_name
         serv_login['user_name'] = utils.encrypt_val(input("Username: "))
@@ -39,7 +39,7 @@ def new_service():
         serv_login['numq'] = num_secq
         redisHandler.put(serv_login, r)
         utils.kill_redis_conn(r)
-        keyring.entry()
+        Taqqiq.entry()
 
 
 def retrieve_service():
@@ -63,7 +63,7 @@ def retrieve_service():
             ret_entry = input("return to entry screen? [y]: ").lower()
         if ret_entry in ['y', 'yes']:
             utils.kill_redis_conn(r)
-            keyring.entry()
+            Taqqiq.entry()
     else:
         utils.kill_redis_conn(r)
         print("No entry exists for " + serv_name)
@@ -75,7 +75,7 @@ def retrieve_service():
             new_service()
         else:
             utils.kill_redis_conn(r)
-            keyring.entry()
+            Taqqiq.entry()
 
 
 def edit_service():
@@ -95,11 +95,11 @@ def edit_service():
             new_field_val = utils.encrypt_val(input("Enter the new " + f + ": "))
             redisHandler.edit(serv_name, f, new_field_val, r)
         utils.kill_redis_conn(r)
-        keyring.entry()
+        Taqqiq.entry()
     else:
         print("No entry exists for " + serv_name)
         utils.kill_redis_conn(r)
-        keyring.entry()
+        Taqqiq.entry()
 
 
 def delete_service():
@@ -114,19 +114,19 @@ def delete_service():
             redisHandler.delete(serv_name, r)
             print("Entry for " + serv_name + " has been deleted.")
             utils.kill_redis_conn(r)
-            keyring.entry()
+            Taqqiq.entry()
         else:
             utils.kill_redis_conn(r)
-            keyring.entry()
+            Taqqiq.entry()
     else:
         print("No entry exists for " + serv_name)
         utils.kill_redis_conn(r)
-        keyring.entry()
+        Taqqiq.entry()
 
 
 def delete_all():
     print('Delete All')
-    print("Are you sure? This is will delete all entries in the KeyRing.")
+    print("Are you sure? This is will delete all entries in the Taqqiq.")
     print("This action is irreversible.")
     del_all = input("[y/N]: ").lower()
     while del_all not in ['y', 'n', 'yes', 'no']:
@@ -135,10 +135,10 @@ def delete_all():
         r = utils.init_redis()
         redisHandler.erase_all(r)
         utils.kill_redis_conn(r)
-        print("All entries in KeyRing have been deleted.")
-        keyring.entry()
+        print("All entries in Taqqiq have been deleted.")
+        Taqqiq.entry()
     else:
-        keyring.entry()
+        Taqqiq.entry()
 
 
 def retrieve_all():
@@ -154,17 +154,17 @@ def retrieve_all():
             ret_entry = input("return to entry screen? [y]: ").lower()
         if ret_entry in ['y', 'yes']:
             utils.kill_redis_conn(r)
-            keyring.entry()
+            Taqqiq.entry()
     else:
-        print("No entries in KeyRing")
+        print("No entries in Taqqiq")
         utils.kill_redis_conn(r)
         ret_entry = input("return to entry screen? [y]: ").lower()
         while ret_entry not in ['y', 'yes']:
             ret_entry = input("return to entry screen? [y]: ").lower()
         if ret_entry in ['y', 'yes']:
-            keyring.entry()
+            Taqqiq.entry()
 
 
-def keyring_exit():
+def Taqqiq_exit():
     pass
 
