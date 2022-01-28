@@ -2,7 +2,7 @@ import IO
 
 
 def entry():
-    print("KeyRing")
+    print("Taqqiq: A Credentials Management System")
 
     print("1. New Key")
     print("2. Retrieve Key")
@@ -15,10 +15,10 @@ def entry():
     while func not in ['1', '2', '3', '4', '5', '6', 'exit']:
         func = str(input("Choose between [1 - 6] or exit: "))
 
-    call_keyring(func)
+    call_Taqqiq(func)
 
 
-def call_keyring(func: object) -> object:
+def call_Taqqiq(func):
     if func == '1':
         IO.new_service()
     elif func == '2':
@@ -32,8 +32,4 @@ def call_keyring(func: object) -> object:
     elif func == '6':
         IO.retrieve_all()
     elif func == 'exit':
-        IO.keyring_exit()
-
-
-if __name__ == '__main__':
-    entry()
+        IO.Taqqiq_exit()
